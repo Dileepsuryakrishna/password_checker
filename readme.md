@@ -1,53 +1,99 @@
-# Advanced Password Strength Analyzer
+# Password Strength Checker
 
-A command-line tool built with Python to analyze password strength based on multiple security criteria, including length, character variety, entropy, and exposure in known data breaches via the 'Have I Been Pwned' API.
+![Python Version](https://img.shields.io/badge/python-3.x-blue.svg)
+![License](https://img.shields.io/badge/License-GPLv3-blue.svg)
 
-## Key Features ✨
+A comprehensive password strength checking tool with both GUI and CLI interfaces. This application helps users create and validate secure passwords using advanced strength checking algorithms.
 
--   **Length & Variety Analysis:** Checks for password length and the use of uppercase letters, lowercase letters, numbers, and symbols.
--   **Pattern Detection:** Identifies weak patterns like character sequences (`abc...`) and repetitions (`aaa...`).
--   **Entropy Calculation:** Measures the true randomness of the password in bits using the formula `E = L * log2(N)`.
--   **Data Breach Check:** Securely checks if the password has been exposed in a data breach using the Pwned Passwords API and the k-Anonymity model.
--   **Detailed Feedback:** Provides a final score, a rating from "Weak" to "Very Strong", and actionable feedback with colored output for readability.
--   **Secure Input:** Uses `getpass` to ensure passwords are not echoed to the terminal when entered interactively.
+*Replace this with a screenshot or GIF of your application's GUI and CLI.*
+![App Screenshot](./screenshot.png)
 
-## Security Concepts Demonstrated 🛡️
+## ✨ Features
 
--   **Entropy:** The core measure of a password's unpredictability against brute-force attacks.
--   **k-Anonymity:** The privacy-preserving model used to interact with the HIBP API. The tool only sends the first 5 characters of a password's SHA-1 hash, protecting the full password from exposure.
+-   **Dual Interface:** Choose between a user-friendly Graphical User Interface (GUI) or an efficient Command-Line Interface (CLI).
+-   **Advanced Strength Analysis:** Uses the powerful **zxcvbn** algorithm for realistic password strength assessment that recognizes common patterns, words, and substitutions.
+-   **Secure Password Generation:** Create strong, random passwords of a customisable length.
+-   **Comprehensive Checks:** Validates passwords against multiple criteria, including minimum length, character complexity (uppercase, lowercase, numbers, symbols), and lists of common or banned passwords.
+-   **Improvement Suggestions:** Get specific, actionable recommendations to strengthen weak passwords.
+-   **Export Functionality:** Save detailed password check results to a JSON file directly from the GUI.
+-   **Detailed Logging:** Automatically tracks all password check operations in a local log file for auditing purposes.
 
-## Installation ⚙️
+## ⚙️ Installation
 
-1.  Clone the repository:
+1.  **Clone the repository:**
     ```bash
-    git clone [https://github.com/YOUR_USERNAME/password-strength-analyzer.git](https://github.com/YOUR_USERNAME/password-strength-analyzer.git)
-    cd password-strength-analyzer
+    git clone [https://github.com/yourusername/password-strength-checker.git](https://github.com/yourusername/password-strength-checker.git)
+    cd password-strength-checker
     ```
-2.  Create and activate a virtual environment:
-    ```bash
-    python -m venv venv
-    source venv/bin/activate  # On Windows: venv\Scripts\activate
-    ```
-3.  Install dependencies:
-    ```bash
-    pip install -r requirements.txt
-    ```
+    *Remember to replace `yourusername` with your actual GitHub username.*
 
-## Usage 🚀
-
-You can run the script in two ways:
-
-1.  **Interactive Mode (Recommended & Secure):**
+2.  **Install dependencies:**
     ```bash
-    python strength_checker.py
-    ```
-    You will be prompted to enter a password securely.
-
-2.  **Argument Mode:**
-    ```bash
-    python strength_checker.py "Your-Password-Here-123!"
+    pip install zxcvbn
     ```
 
-### **Security Disclaimer**
+3.  **Required Wordlists:**
+    Ensure the following files are present in the project directory:
+    * `weak_passwords.txt`: A list of commonly used weak passwords.
+    * `banned_passwords.txt`: A list of company-specific or otherwise banned passwords.
 
-This is an educational project. While the HIBP API check is designed to be secure, **never enter sensitive passwords into tools or websites you do not fully trust.**
+## 🚀 Usage
+
+You can run the application in either GUI or CLI mode.
+
+### GUI Mode
+Launch the graphical interface by running the script without any arguments:
+```bash
+python password_strength_checker.py
+```
+
+### CLI Mode
+For command-line operations, use the following commands.
+
+-   **Launch Interactive CLI:**
+    ```bash
+    python password_strength_checker.py --cli
+    ```
+
+-   **Check a specific password directly:**
+    ```bash
+    python password_strength_checker.py --check "your_password_here"
+    ```
+
+-   **Generate a strong password:**
+    ```bash
+    # Generate a password with default length (16)
+    python password_strength_checker.py --generate
+
+    # Generate a password with a custom length
+    python password_strength_checker.py --generate --length 20
+    ```
+
+## 🛠️ Command-Line Arguments
+
+| Argument            | Description                                           |
+| ------------------- | ----------------------------------------------------- |
+| `--cli`             | Launch the application in interactive CLI mode.       |
+| `--check PASSWORD`  | Check the strength of a specific password directly.   |
+| `--generate`        | Generate a new strong, random password.               |
+| `--length N`        | Specify the length for the generated password.        |
+
+## 🔐 Security Notes
+
+Your security is the top priority. Please note the following:
+-   **No Permanent Storage:** Passwords entered for checking are never stored permanently.
+-   **Local Processing:** All password analysis is done locally on your machine.
+-   **No External API Calls:** This tool does not make any external network calls to check passwords, ensuring your data remains private.
+-   **Secure Generation:** New passwords are created using Python's `secrets` module for cryptographically strong randomness.
+
+## 📜 Logging
+
+The application logs all password check operations to `password_checker.log`. Each log entry includes a timestamp, the action performed (e.g., `CHECK_PASSWORD`), and the strength result.
+
+## 🤝 Contributing
+
+Contributions are welcome! Feel free to submit issues, fork the repository, and create pull requests for any bugs or improvements.
+
+## 📄 License
+
+This project is licensed under the GPL 3.0 License. See the `LICENSE` file for details.
