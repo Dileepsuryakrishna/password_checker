@@ -1,4 +1,4 @@
-# Password Strength Checker
+# Advanced Password Strength Analyzer
 
 ![Python Version](https://img.shields.io/badge/python-3.x-blue.svg)
 ![License](https://img.shields.io/badge/License-GPLv3-blue.svg)
@@ -17,6 +17,22 @@ A comprehensive password strength checking tool with both GUI and CLI interfaces
 -   **Improvement Suggestions:** Get specific, actionable recommendations to strengthen weak passwords.
 -   **Export Functionality:** Save detailed password check results to a JSON file directly from the GUI.
 -   **Detailed Logging:** Automatically tracks all password check operations in a local log file for auditing purposes.
+
+## 🧠 Core Concepts Explained
+
+This tool uses several methods to determine password strength:
+
+-   **Entropy:** This is a measure of a password's unpredictability and randomness. It's calculated based on the password's **length** and the size of the **character pool** (e.g., lowercase, uppercase, numbers, symbols used). Higher entropy means it's exponentially harder for a computer to brute-force.
+
+-   **Pattern Matching:** The checker actively looks for lazy and predictable patterns that weaken a password, such as:
+    -   **Sequences:** `abc`, `123`, `qwerty`
+    -   **Repetitions:** `aaaa`, `1111`, `!!!`
+
+-   **Data Breach Check (k-Anonymity):** The tool checks your password against a database of billions of breached passwords using a secure model that protects your privacy.
+    1.  Your password is **never** sent over the internet.
+    2.  It is hashed (scrambled) locally on your computer.
+    3.  Only the **first 5 characters** of the hash are sent to the Have I Been Pwned API.
+    4.  Your computer does the final check locally, ensuring your password remains anonymous.
 
 ## ⚙️ Installation
 
